@@ -18,7 +18,7 @@ int mic_avg = 0;
 void setup() {
   Serial.begin(115200);
 
-  Serial.printf("Current firmware version: ");
+  Serial.print("Current firmware version: ");
   Serial.println(FIRMWARE_VERSION);
   delay(200);
 
