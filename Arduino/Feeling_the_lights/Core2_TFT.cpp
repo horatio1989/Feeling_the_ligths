@@ -6,12 +6,11 @@ int fcounter = 0;
 
 void Task_TFT(void * parameter) {
   for( ;; ) {
-    int bass_level = 1;
-    float side     = oscillate(fcounter, 0, 280);
-
-    float oscValue = oscillate(fcounter, -30, 30);
-    int centerX    = 125 + static_cast<int>(oscValue);
-    int centerY    = 122 + static_cast<int>(oscValue);
+    int   bass_level = 1;
+    float side       = oscillate(fcounter, 0, 280);
+    float oscValue   = oscillate(fcounter, -30, 30);
+    int   centerX    = 125 + static_cast<int>(oscValue);
+    int   centerY    = 122 + static_cast<int>(oscValue);
 
     sprite.createSprite(240, 240);
     sprite.fillSprite(TFT_BLACK);
