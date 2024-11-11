@@ -1,6 +1,6 @@
 @echo off
 
-set "sourcePath=%cd%"
+set "sourcePath=C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\PlatformIO\Feeling_the_lights"
 set "destPath=C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\Arduino\Feeling_the_lights"  REM Cambia esto a la ruta de tu proyecto de Arduino IDE
 
 xcopy "%sourcePath%\src" "%destPath%\" /E /Y
