@@ -8,7 +8,8 @@ os_type = platform.system()
 if os_type == "Darwin":
     sh_script_path = "xxx/Quantum/PlatformIO/Feeling_the_lights/sync_mac.sh"
 elif os_type == "Windows":
-    sh_script_path = r"C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\PlatformIO\Feeling_the_lights\sync.bat"
+    # sh_script_path = r"C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\PlatformIO\Feeling_the_lights\sync.bat"
+    sh_script_path = r"C:\Users\MrH\Dropbox\Proyectos\Kaleidoscopio\Feeling_the_ligths\PlatformIO\Feeling_the_lights\sync.bat"
 else:
     print(f"Unsupported OS: {os_type}")
     sys.exit(1)
