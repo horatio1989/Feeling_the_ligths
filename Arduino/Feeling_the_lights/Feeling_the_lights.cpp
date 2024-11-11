@@ -20,7 +20,6 @@ void setup() {
 
   Serial.print("Current firmware version: ");
   Serial.println(FIRMWARE_VERSION);
-  Serial.print("a verga");
   delay(200);
 
   wifi_init();
@@ -45,7 +44,7 @@ void setup() {
       1,          // Priority of the task
       &Task_LEDstrip,     // Task handle.
       0);         // Core where the task should run
-  Serial.println("Task on core 0 ready");
+  Serial.println("LED Task on core 0 ready");
   
   xTaskCreatePinnedToCore(
       Task_TFT_code,  // Function to implement the task
@@ -55,7 +54,7 @@ void setup() {
       2,          // Priority of the task
       &Task_TFT,     // Task handle.
       1);         // Core where the task should run
-  Serial.println("Task on core 1 ready");
+  Serial.println("TFT Task on core 1 ready");
 }
 
 void loop() {}

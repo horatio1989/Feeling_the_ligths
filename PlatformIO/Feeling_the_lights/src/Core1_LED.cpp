@@ -10,7 +10,7 @@ void Task_LEDstrip_code(void * parameter) {
     int volume = getVolume(MIC_DOUT_AOUT, mic_avg);
     int volume_mapped = map(volume, 0, 200, 0, 100);
     double intensidad = 0.0;
-    switch (counter) {
+    switch (eff_counter) {
       case 1:
         runEffect1(volume_mapped);
         break;

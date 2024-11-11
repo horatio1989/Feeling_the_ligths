@@ -25,7 +25,7 @@ extern void update_fw(bool fw2update);
 
 extern Adafruit_NeoPixel strip;
 
-extern int counter;
+extern int eff_counter;
 extern bool flag;
 
 void isr();

@@ -23,7 +23,7 @@ Adafruit_NeoPixel strip(N_LED, STRIP_PIN, NEO_GRB + NEO_KHZ800);
 SPIClass spiSD(HSPI);
 
 void wifi_init() {
-  //WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_STA);
   for (int i = 0; i < 3; i++) {
     Serial.print("Conectando a ");
     Serial.println(ssid[i]);
@@ -71,7 +71,6 @@ void ota_init() {
       else if (error == OTA_END_ERROR)     Serial.println("End Failed");
     });
   ArduinoOTA.begin();
-  //ArduinoOTA.begin(WiFi.localIP(), "Arduino", "password", InternalStorage);
 }
 
 #define SD_CS    36
@@ -123,49 +122,39 @@ void imu_init() {
   delay(200);
 }
 
-/*int counter = 5; // Interrupt counter
-unsigned long tiempoUltimaInterrupcion = 0;
-const unsigned long debounceDelay = 50;
+unsigned long t_last_int  = 0;
+unsigned long t_0         = 0;
+volatile bool btn_pressed = false;
+int           eff_counter = 5;
+const int     deb_delay   = 50;   // [ms]
+const int     min_t       = 1000; // [ms]
+bool          flag        = 0;
 
 void IRAM_ATTR isr() {
-  unsigned long tiempoActual = millis();
-  if (tiempoActual - tiempoUltimaInterrupcion > debounceDelay) {
-    tiempoUltimaInterrupcion = tiempoActual;
-    counter = counter + 1;
-    if (counter == 6) counter = 1;
-  }
-}*/
-unsigned long tiempoUltimaInterrupcion = 0;
-unsigned long tiempoInicioPresionado = 0;
-volatile bool botonPresionado = false;
-int counter = 5;
-const int debounceDelay = 50;
-const int longPressDuration = 1000; // 1 segundo en milisegundos
-bool flag = 0;
+  unsigned long t_1 = millis();
 
-void IRAM_ATTR isr() {
-  unsigned long tiempoActual = millis();
+  if (t_1 - t_last_int > deb_delay) {
+    t_last_int = t_1;
 
-  // Manejar el rebote
-  if (tiempoActual - tiempoUltimaInterrupcion > debounceDelay) {
-    tiempoUltimaInterrupcion = tiempoActual;
+    if (!btn_pressed)
+      t_0 = t_1;
+    else {
+      btn_pressed = false;
+      unsigned long delta_t = t_1 - t_0;
 
-    if (!botonPresionado) {
-      tiempoInicioPresionado = tiempoActual;
-      botonPresionado = true;
-    } else {
-      botonPresionado = false;
-      unsigned long duracionPresion = tiempoActual - tiempoInicioPresionado;
-
-      if (duracionPresion > longPressDuration) {
-        flag = !flag;
-      } else {
-        counter = counter + 1;
-        if (counter == 6) counter = 1;
-      }
+      if (delta_t > min_t) flag = !flag;
+      else                 eff_counter = (eff_counter % 6) + 1;
     }
+    btn_pressed = !btn_pressed;
   }
 }
+/*void IRAM_ATTR isr() {
+  unsigned long t_0 = millis();
+  if (t_0 - t_last_int > deb_delay) {
+    t_last_int = t_0;
+    eff_counter = (eff_counter % 6) + 1;
+  }
+}*/
 
 int mic_init(int micPin) {
   int sum = 0;

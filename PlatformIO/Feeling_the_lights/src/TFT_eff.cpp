@@ -68,11 +68,9 @@ void triangulos_javi() {
       sprite.drawLine(points[0][indices[i]].first, points[0][indices[i]].second,
                     points[1][indices[i]].first, points[1][indices[i]].second,
                     sprite.color565(255, 0, 0));
-      //sprite.pushSprite(0, 0);
       sprite.drawLine(points[1][indices[i]].first, points[1][indices[i]].second,
                     points[2][n_points - indices[i]].first, points[2][n_points - indices[i]].second,
                     sprite.color565(0, 255, 0));
-      //sprite.pushSprite(0, 0);
       sprite.drawLine(points[0][indices[i]].first, points[0][indices[i]].second,
                     points[2][n_points - indices[i]].first, points[2][n_points - indices[i]].second,
                     sprite.color565(0, 0, 255));
@@ -187,12 +185,11 @@ double efectos_bajos(double dt_factor, double static_threshold) {
 
 float oscillate(int counter, float minValue, float maxValue) {
   float length = fabs(maxValue - minValue);
-  if (length == 0) {
-    return minValue;  // minValue and maxValue are the same
-  }
-  int cycle = 2 * length;
-  int counter_mod = counter % cycle;
-  float delta = length - fabs(length - counter_mod);
+  if (length == 0) return minValue;  // minValue and maxValue are the same
+
+  int   cycle       = 2 * length;
+  int   counter_mod = counter % cycle;
+  float delta       = length - fabs(length - counter_mod);
   return minValue + delta;
 }
 
@@ -217,47 +214,35 @@ void rotatePoint(float px, float py, float cx, float cy, float angleDegrees, flo
 
 // Function to convert HSV to RGB
 void HSVtoRGB(float h, float s, float v, uint8_t &r, uint8_t &g, uint8_t &b) {
+    if (s == 0) {  // Cuando la saturación es 0, el color es gris
+        r = g = b = static_cast<uint8_t>(v * 255);
+        return;
+    }
+
     float c = v * s;
     float x = c * (1 - fabs(fmod(h / 60.0, 2) - 1));
     float m = v - c;
-    float r_, g_, b_;
 
-    if (h >= 0 && h < 60) {
-        r_ = c;
-        g_ = x;
-        b_ = 0;
-    } else if (h >= 60 && h < 120) {
-        r_ = x;
-        g_ = c;
-        b_ = 0;
-    } else if (h >= 120 && h < 180) {
-        r_ = 0;
-        g_ = c;
-        b_ = x;
-    } else if (h >= 180 && h < 240) {
-        r_ = 0;
-        g_ = x;
-        b_ = c;
-    } else if (h >= 240 && h < 300) {
-        r_ = x;
-        g_ = 0;
-        b_ = c;
-    } else {
-        r_ = c;
-        g_ = 0;
-        b_ = x;
+    float r_, g_, b_;
+    
+    int segment = static_cast<int>(h / 60.0) % 6;
+    switch (segment) {
+        case 0: r_ = c; g_ = x; b_ = 0; break;
+        case 1: r_ = x; g_ = c; b_ = 0; break;
+        case 2: r_ = 0; g_ = c; b_ = x; break;
+        case 3: r_ = 0; g_ = x; b_ = c; break;
+        case 4: r_ = x; g_ = 0; b_ = c; break;
+        case 5: r_ = c; g_ = 0; b_ = x; break;
     }
 
-    r = (r_ + m) * 255;
-    g = (g_ + m) * 255;
-    b = (b_ + m) * 255;
+    r = static_cast<uint8_t>((r_ + m) * 255);
+    g = static_cast<uint8_t>((g_ + m) * 255);
+    b = static_cast<uint8_t>((b_ + m) * 255);
 }
 
 // Modify the drawFractal function to accept hue and depth
 void drawFractal(TFT_eSprite &sprite, int cx, int cy, float side, float counter, float hue, int depth) {
-    if (depth > 3) {
-        return; // Base case to stop recursion when the side is too small
-    }
+    if (depth > 4) return; // Base case to stop recursion when the side is too small
 
     // Adjust hue based on recursion depth to create color variation
     float newHue = fmod(hue + depth * 30, 360); // Change 30 to adjust the hue shift per depth

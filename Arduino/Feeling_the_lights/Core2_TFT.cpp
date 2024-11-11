@@ -6,13 +6,12 @@ int fcounter = 0;
 
 void Task_TFT_code(void * parameter) {
   for( ;; ) {
-    //ArduinoOTA.handle();
     int bass_level = 1;
-    float side = oscillate(fcounter, 0, 280);
+    float side     = oscillate(fcounter, 0, 280);
 
     float oscValue = oscillate(fcounter, -30, 30);
-    int centerX = 125 + static_cast<int>(oscValue);
-    int centerY = 122 + static_cast<int>(oscValue);
+    int centerX    = 125 + static_cast<int>(oscValue);
+    int centerY    = 122 + static_cast<int>(oscValue);
 
     sprite.createSprite(240, 240);
     sprite.fillSprite(TFT_BLACK);
