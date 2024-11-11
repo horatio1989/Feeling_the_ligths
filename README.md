@@ -59,15 +59,18 @@ Ademas, hay que configurar el puerto en VS Code (en la barra inferior, en el eje
 
 ```
 La estructura del proyecto es:
-- Arduino
--- Feeling_the_lights --> Proyecto en Arduino
-- PlatformIO
--- Extra Files --> files necesarias para agregar del proyecto en Platform IO
--- Feeling_the_lights --> Proyecto en PlatformIO
-- Python
--- Original --> tus scripts en Python
--- To convert --> scripts que ya estan listos para convertir a C
--- Converted --> scripts que ya estan convertidos a C esperando ser includios en platformIO
+Feeling the lights
+  └─ Arduino
+     └─ Feeling_the_lights --> Proyecto en Arduino
+  └─ PlatformIO
+     └─ Extra Files        --> files necesarias para agregar del proyecto en Platform IO
+     └─ Feeling_the_lights --> Proyecto en PlatformIO
+        └─ src             --> *.cpp files
+        └─ include         --> *.h files
+  └─ Python
+     └─ Original   --> tus scripts en Python
+     └─ To convert --> scripts que ya estan listos para convertir a C
+     └─ Converted  --> scripts que ya estan convertidos a C esperando ser includios en platformIO
 ```
 FINALMENTE: recomiendo mucho usar VS Code + Platform IO. PERO si sos tan vago de no querer cambiar y quere seguir usando Arduino IDE... Hace lo siguiente:
 - Abri el archivo "Feeling_the_lights_ino.ino" que se encuentra en la carpeta "Feeling_the_lights_ino". mas facil no te lo puedo haber dejado! PERO no pushees ningun cambio que hagas ahi, porque yo trabajo en Platform IO y automaticamente cuando commiteo, se copian todos los archivos a esa carpeta, con lo cual perderias cualquier cosa que hayas hecho. De prefencia, lo que tengas de nuevo, pegalo en el archivo correspondiente cpp y h dentro de la estructura de proyecto de Platform IO
