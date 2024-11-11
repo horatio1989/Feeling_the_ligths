@@ -20,7 +20,6 @@ void setup() {
 
   Serial.print("Current firmware version: ");
   Serial.println(FIRMWARE_VERSION);
-  Serial.print("a verga");
   delay(200);
 
   wifi_init();
