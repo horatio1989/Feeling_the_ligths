@@ -55,7 +55,8 @@ Y descomentar las siguientes, agregando el IP correspondiente:
 ;    --port=3232 
 ```
 Ademas, hay que configurar el puerto en VS Code (en la barra inferior, en el ejemplo donde dice "COM21")
-![image](https://github.com/user-attachments/assets/aeb61533-ffef-4ed7-a84a-a2152dc2df1f)
+![image](https://github.com/user-attachments/assets/aea5b9ce-8096-4357-9706-514b64832f87)
+
 
 ```
 La estructura del proyecto es:
