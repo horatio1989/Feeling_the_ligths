@@ -68,11 +68,9 @@ void triangulos_javi() {
       sprite.drawLine(points[0][indices[i]].first, points[0][indices[i]].second,
                     points[1][indices[i]].first, points[1][indices[i]].second,
                     sprite.color565(255, 0, 0));
-      //sprite.pushSprite(0, 0);
       sprite.drawLine(points[1][indices[i]].first, points[1][indices[i]].second,
                     points[2][n_points - indices[i]].first, points[2][n_points - indices[i]].second,
                     sprite.color565(0, 255, 0));
-      //sprite.pushSprite(0, 0);
       sprite.drawLine(points[0][indices[i]].first, points[0][indices[i]].second,
                     points[2][n_points - indices[i]].first, points[2][n_points - indices[i]].second,
                     sprite.color565(0, 0, 255));

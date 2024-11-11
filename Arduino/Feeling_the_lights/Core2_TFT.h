@@ -9,6 +9,6 @@
 #include "QuantumOTH.h"
 #include "TFT_eff.h"
 
-void Task_TFT_code(void * parameter);
+void Task_TFT(void * parameter);
 
 #endif

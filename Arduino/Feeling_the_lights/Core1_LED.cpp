@@ -4,7 +4,7 @@
 
 #include "QuantumDEF.h"
 
-void Task_LEDstrip_code(void * parameter) {
+void Task_LED(void * parameter) {
   for( ;; ) {
     ArduinoOTA.handle();
     int volume = getVolume(MIC_DOUT_AOUT, mic_avg);

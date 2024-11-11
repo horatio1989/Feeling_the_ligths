@@ -9,6 +9,6 @@
 #include "LED_eff.h"
 #include "TFT_eff.h"
 
-void Task_LEDstrip_code(void * parameter);
+void Task_LED(void * parameter);
 
 #endif

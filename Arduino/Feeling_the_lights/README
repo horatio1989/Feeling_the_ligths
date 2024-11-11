@@ -1,38 +1,39 @@
-Pasos para configurar el Arduino:
 
-Recomiendo mucho usar VS Code + Platform IO. PERO si sos tan vago de no querer cambiar y quere seguir usando Arduino IDE... Hace lo siguiente:
-- Abri el archivo "Feeling_the_lights.ino" que se encuentra en la carpeta "Feeling_the_lights_ino". mas facil no te lo puedo haber dejado! PERO no pushees ningun cambio que hagas ahi, porque yo trabajo en Platform IO y automaticamente cuando commiteo, se copian todos los archivos a esa carpeta, con lo cual perderias cualquier cosa que hayas hecho. De prefencia, lo que tengas de nuevo, pegalo en el archivo correspondiente cpp y h dentro de la estructura de proyecto de Platform IO
-- En Arduino IDE configura todo para el ESP32
-    - CDC on Boot: Disable
-    - CPU Freq: 240MHz
-    - Core Debug: None
-    - USB DFU: Disable
-    - Erase all flash: Enable
-    - Events run on: Core1
-    - Flash Mode: QIO 80MHz
-    - Flash Size: 16Mb
-    - JTAG: Disable
-    - Arduino runs on: Core 1
-    - USB Firmware: Disable
-    - Partition scheme: Custom 16MB
-    - PSRAM: QSPI PSRAM
-    - Upload mode: UART0
-    - Upload Speed: 921600
-    - USB Mode: Hardware CDC and JTAG
-    - Zigbee: Disable
-    - Programmer: esptool
+This directory is intended for project header files.
 
-- La primera vez tenes que configurar para que Arduino encuentre es esquema de particion que genere. Para eso segui estos pasos:
-    - busca en MAC donde se encuentra instalado los archivos del esp32 para Arduino.
-    - Luego en el archivo "platform.txt" reemplazar la linea "build.custom_partitions=partitions" por build.custom_partitions=custom_16MB
-    - En el archivo boards.txt agregar estas tres lineas:
+A header file is a file containing C declarations and macro definitions
+to be shared between several project source files. You request the use of a
+header file in your project source file (C, C++, etc) located in `src` folder
+by including it, with the C preprocessing directive `#include'.
 
-```
-esp32s3.menu.PartitionScheme.custom_16MB=Custom 16MB
-esp32s3.menu.PartitionScheme.custom_16MB.build.partitions=partitions/custom_16MB.csv
-esp32s3.menu.PartitionScheme.custom_16MB.upload.maximum_size=16777216
+```src/main.c
+
+#include "header.h"
+
+int main (void)
+{
+ ...
+}
 ```
 
-- Finalmente copiar el archivo de particiones "custom_16MB.csv" que esta junto al archivo ino en la carpeta ...\variants\esp32s3 y en la carpeta ...\tools\partitions
+Including a header file produces the same results as copying the header file
+into each source file that needs it. Such copying would be time-consuming
+and error-prone. With a header file, the related declarations appear
+in only one place. If they need to be changed, they can be changed in one
+place, and programs that include the header file will automatically use the
+new version when next recompiled. The header file eliminates the labor of
+finding and changing all the copies as well as the risk that a failure to
+find one copy will result in inconsistencies within a program.
 
-Con eso deberia andar
+In C, the usual convention is to give header files names that end with `.h'.
+It is most portable to use only letters, digits, dashes, and underscores in
+header file names, and at most one dot.
+
+Read more about using header files in official GCC documentation:
+
+* Include Syntax
+* Include Operation
+* Once-Only Headers
+* Computed Includes
+
+https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html

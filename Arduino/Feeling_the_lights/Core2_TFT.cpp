@@ -4,7 +4,7 @@
 
 int fcounter = 0;
 
-void Task_TFT_code(void * parameter) {
+void Task_TFT(void * parameter) {
   for( ;; ) {
     int bass_level = 1;
     float side     = oscillate(fcounter, 0, 280);
