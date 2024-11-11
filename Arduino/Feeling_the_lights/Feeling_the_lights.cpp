@@ -46,9 +46,10 @@ void setup() {
       &h_Task_LED,    // Task handle.
       0);             // Core where the task should run
   Serial.println("LED Task on core 0 ready");
-  Serial.print("% Stack LED libre: ");
-  Serial.println((int)(uxTaskGetStackHighWaterMark(h_Task_LED)/100));
-  Serial.println(" ********************");
+  Serial.print("Stack LED libre: ");
+  Serial.print((int)(uxTaskGetStackHighWaterMark(h_Task_LED)/100));
+  Serial.println("%");
+  Serial.println("********************");
   
   xTaskCreatePinnedToCore(
       Task_TFT,       // Function to implement the task
@@ -59,9 +60,10 @@ void setup() {
       &h_Task_TFT,    // Task handle.
       1);             // Core where the task should run
   Serial.println("TFT Task on core 1 ready");
-  Serial.print("% Stack TFT libre: ");
-  Serial.println((int)(uxTaskGetStackHighWaterMark(h_Task_TFT)/100));
-  Serial.println(" ********************");
+  Serial.print("Stack TFT libre: ");
+  Serial.print((int)(uxTaskGetStackHighWaterMark(h_Task_TFT)/100));
+  Serial.println("%");
+  Serial.println("********************");
 }
 
 void loop() {}
