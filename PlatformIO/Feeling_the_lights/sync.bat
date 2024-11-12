@@ -1,6 +1,6 @@
 @echo off
 
-if "%COMPUTERNAME%" == "NOMBRE_PC_1" (
+if "%COMPUTERNAME%" == "C0256-S2364" (
     set "sourcePath=C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\PlatformIO\Feeling_the_lights"
     set "destPath=C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\Arduino\Feeling_the_lights"  REM Cambia esto a la ruta de tu proyecto de Arduino IDE
 ) else if "%COMPUTERNAME%" == "DESKTOP-AVPTRI1" (

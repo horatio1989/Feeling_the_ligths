@@ -11,7 +11,7 @@ if os_type == "Darwin":
     sh_script_path = "xxx/Quantum/PlatformIO/Feeling_the_lights/sync_mac.sh"
 elif os_type == "Windows":
     computer_name = socket.gethostname()
-    if computer_name == "nombre_computadora_1":
+    if computer_name == "C0256-S2364":
         sh_script_path = r"C:\Users\didjw296\OneDrive - Dentsply Sirona\Dokumente\PlatformIO\Projects\Quantum\PlatformIO\Feeling_the_lights\sync.bat"
     elif computer_name == "DESKTOP-AVPTRI1":
         sh_script_path = r"C:\Users\MrH\Dropbox\Proyectos\Kaleidoscopio\Feeling_the_ligths\PlatformIO\Feeling_the_lights\sync.bat"
