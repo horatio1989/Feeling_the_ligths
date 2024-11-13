@@ -20,4 +20,7 @@ float oscillate(int counter, float minValue, float maxValue);
 void rotatePoint(float px, float py, float cx, float cy, float angleDegrees, float &rx, float &ry);
 void HSVtoRGB(float h, float s, float v, uint8_t &r, uint8_t &g, uint8_t &b);
 void drawFractal(TFT_eSprite &sprite, int cx, int cy, float side, float counter, float hue, int depth);
+
+// Prototipos que estan siendo trabajados
+void figura();
 #endif

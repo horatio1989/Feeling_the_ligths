@@ -274,3 +274,34 @@ void drawFractal(TFT_eSprite &sprite, int cx, int cy, float side, float counter,
     rotatePoint(cx - side * 0.6, cy, cx, cy, counter, cx_r, cy_r);
     drawFractal(sprite, cx_r, cy_r, side / 2, counter, hue, depth + 1); // Recursively draw bottom-right triangle
 }
+
+// Prototipos que estan siendo trabajados
+const float VISIBLE_ANGLE_MIN = -5.0;   // Ángulo mínimo para la visibilidad del cuadrado
+const float VISIBLE_ANGLE_MAX = 5.0; 
+const int CENTER_X = 120;          // Centro horizontal de la pantalla
+const int CENTER_Y = 120;          // Centro vertical de la pantalla
+const int SQUARE_SIZE = 80;        // Tamaño fijo del cuadrado
+const int SCREEN_WIDTH = 240; 
+
+void figura() {
+  readIMU();  // Lee los ángulos actuales
+
+  // Calcula la posición horizontal del cuadrado en función de angleZ con precisión de float
+  float positionX = map(angleX, VISIBLE_ANGLE_MIN, VISIBLE_ANGLE_MAX, -SQUARE_SIZE, SCREEN_WIDTH);
+
+  // Limpia la pantalla
+  sprite.createSprite(240, 240);
+  sprite.fillSprite(TFT_BLACK);
+
+  // Si el ángulo está en la ventana visible, dibuja el cuadrado
+  if (angleX >= VISIBLE_ANGLE_MIN && angleX <= VISIBLE_ANGLE_MAX) {
+    int color = sprite.color565(255, 255, 255); // Color blanco (sin cambio de intensidad)
+    
+    // Dibuja el cuadrado en la posición calculada con suavidad
+    sprite.fillRect(static_cast<int>(positionX), CENTER_Y - SQUARE_SIZE / 2, SQUARE_SIZE, SQUARE_SIZE, color);
+  }
+
+  // Muestra el sprite en la pantalla
+  sprite.pushSprite(0, 0);
+  delay(1);  // Reducción de delay para actualizaciones más frecuentes y movimiento más suave
+}

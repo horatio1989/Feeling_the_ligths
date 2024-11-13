@@ -23,7 +23,7 @@ float biasX = 0.0;
 float biasY = 0.0;
 float biasZ = 0.0;
 void calIMU() {
-  int calibrationSamples = 100;
+  int calibrationSamples = 1000;
   float sumX = 0.0;
   float sumY = 0.0;
   float sumZ = 0.0;
@@ -42,24 +42,47 @@ void calIMU() {
 float angleX = 0.0;
 float angleY = 0.0;
 float angleZ = 0.0;
+unsigned long lastTime = 0;
 void readIMU() {
   unsigned long currentTime = millis();
-  int           lastTime    = 0;
   float deltaTime = (currentTime - lastTime) / 1000.0;  // Convierte a segundos
   lastTime = currentTime;
+  float alpha = 0.95;
+  
   if (imu.getDataReady()) {
     imu.getGyroscope(gyr.x, gyr.y, gyr.z);
     imu.getAccelerometer(acc.x, acc.y, acc.z);
+
+    float accAngleX = atan2(acc.y, acc.z) * 180 / PI;
+    float accAngleY = atan2(-acc.x, acc.z) * 180 / PI;
+
+    float gyroRateX = (gyr.x - biasX);
+    float gyroRateY = (gyr.y - biasY);
+    float gyroRateZ = (gyr.z - biasZ);
+
+    // Ajuste dinámico de `alpha`: aumentar `alpha` cuando hay movimiento rápido
+    float alpha = (abs(gyroRateX) > 0.1 || abs(gyroRateY) > 0.1) ? 0.98 : 0.90;
+    angleX = alpha * (angleX + gyroRateX * deltaTime) + (1 - alpha) * accAngleX;
+    angleY = alpha * (angleY + gyroRateY * deltaTime) + (1 - alpha) * accAngleY;
+    angleZ += (gyr.z - biasZ) * deltaTime;
+
+    /*angleX = fmod((angleX + 360), 360);
+    angleY = fmod((angleY + 360), 360);
+    angleZ = fmod((angleZ + 360), 360);*/
+  
+    Serial.print(">");
+    Serial.print("X:");
+    Serial.print(angleX);
+    Serial.print(",");
+    Serial.print("Y:");
+    Serial.print(angleY);
+    Serial.print(",");
+    Serial.print("Z:");
+    Serial.print(angleZ);
+    Serial.println(",");
+
+    lastTime = millis();
   }
-  angleX += (gyr.x - biasX) * deltaTime;
-  angleY += (gyr.y - biasY) * deltaTime;
-  angleZ += (gyr.z - biasZ) * deltaTime;
-  Serial.print(angleX);
-  Serial.print("; "); 
-  Serial.print(angleY);
-  Serial.print(";  "); 
-  Serial.println(angleZ);
-  lastTime = millis();
 }
 
 void progresscallback(size_t currSize, size_t totalSize) {

@@ -274,3 +274,30 @@ void drawFractal(TFT_eSprite &sprite, int cx, int cy, float side, float counter,
     rotatePoint(cx - side * 0.6, cy, cx, cy, counter, cx_r, cy_r);
     drawFractal(sprite, cx_r, cy_r, side / 2, counter, hue, depth + 1); // Recursively draw bottom-right triangle
 }
+
+// Prototipos que estan siendo trabajados
+const int VISIBLE_ANGLE_MIN = -5;  // Definir ventana de visibilidad en grados
+const int VISIBLE_ANGLE_MAX = 5;
+const int CENTER_X = 64;           // Centro de la pantalla (ajusta según la resolución de tu TFT)
+const int CENTER_Y = 64;
+void figura() {
+  readIMU();  // Lee ángulos actuales
+
+  float visibilityFactor = 0.0;
+  if (angleZ >= VISIBLE_ANGLE_MIN && angleZ <= VISIBLE_ANGLE_MAX) {
+    visibilityFactor = 1.0 - (abs(angleZ) / (VISIBLE_ANGLE_MAX - VISIBLE_ANGLE_MIN));
+  }
+
+  // Limpia la pantalla
+  sprite.createSprite(240, 240);
+  sprite.fillSprite(TFT_BLACK);
+
+  // Dibuja la figura si está visible
+  if (visibilityFactor > 0) {
+    int squareSize = 40 * visibilityFactor;  // Ajusta el tamaño del cuadrado según la visibilidad
+    int color = sprite.color565(255 * visibilityFactor, 255 * visibilityFactor, 255); // Escala color según visibilidad
+    sprite.fillRect(CENTER_X - squareSize / 2, CENTER_Y - squareSize / 2, squareSize, squareSize, color);  // Dibuja el cuadrado centrado
+  }
+  sprite.pushSprite(0, 0);
+  delay(50);
+}
