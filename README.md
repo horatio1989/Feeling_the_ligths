@@ -35,7 +35,8 @@ A la hora de setear el proyecto por primera vez, es necesario descargar las sigu
 - 	AnimatedGIF
 - 	Adafruit NeoPixel
 Una vez instaladas esas librerias, hay que reemplazar el archivo "User_Setup.h" que se encuentra en ".pio/libdeps/TFT_eSPI" por el "User_Setup.h" que se encuentra en el proyecto (en ninguna carpeta en particular"
-En donde se encuentre la carpeta ".platformio" en tu MAC, tenes que pegar la carpeta "waveshare_esp32s3_touch_lcd_128"
+
+En donde se encuentre la carpeta "xxx\.platformio\packages\framework-arduinoespressif32\variants" en tu MAC, tenes que pegar la carpeta "waveshare_esp32s3_touch_lcd_128"
 
 El resto de las librerias utilizadas (como SD, SPI, etc.) vienen dentro del paquete de ESP32 o son las librerias creadas por nosotros
 
