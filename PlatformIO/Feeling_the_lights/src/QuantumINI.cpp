@@ -15,8 +15,8 @@
 WiFiServer telnetServer(23);
 WiFiClient telnetClient;
 
-const char* ssid[]     = {"Hofi",      "FRITZ!Box 7590 GZ",    "BGE_DEV"}; // SSID de las redes
-const char* password[] = {"22hofi22!", "53192172497919423784", "d3!!xA12v??"};
+const char* ssid[]     = {"Hofi",      "FRITZ!Box 7583 TQ",    "BGE_DEV"}; // SSID de las redes
+const char* password[] = {"22hofi22!", "26395030011048404128", "d3!!xA12v??"};
 
 Adafruit_NeoPixel strip(N_LED, STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
