@@ -34,11 +34,12 @@ A la hora de setear el proyecto por primera vez, es necesario descargar las sigu
 - 	Adafruit GFX Library
 - 	AnimatedGIF
 - 	Adafruit NeoPixel
-Una vez instaladas esas librerias, hay que reemplazar el archivo "User_Setup.h" que se encuentra en ".pio/libdeps/TFT_eSPI" por el "User_Setup.h" que se encuentra en el proyecto (en ninguna carpeta en particular"
 
-En donde se encuentre la carpeta "xxx\.platformio\packages\framework-arduinoespressif32\variants" en tu MAC, tenes que pegar la carpeta "waveshare_esp32s3_touch_lcd_128"
+Una vez instaladas esas librerias (deberia ser automatico la primera vez que cargas el proyecto en VS Code), hay que reemplazar el archivo "User_Setup.h" que se encuentra en ".pio/libdeps/TFT_eSPI" por el "User_Setup.h" que se encuentra en la carpeta "Extra files".
 
-El resto de las librerias utilizadas (como SD, SPI, etc.) vienen dentro del paquete de ESP32 o son las librerias creadas por nosotros
+En donde se encuentre la carpeta "xxx\.platformio\packages\framework-arduinoespressif32\variants" en tu MAC, tenes que pegar la carpeta "waveshare_esp32s3_touch_lcd_128" que se encuentra dentro de "Extra files.
+
+El resto de las librerias utilizadas (como SD, SPI, etc.) vienen dentro del paquete de ESP32 o son las librerias creadas por nosotros.
 
 En caso de usar OTA para actualizar el firmware dentro del archivo platformio.ini comentar la siguiente linea:
 ```
@@ -109,4 +110,3 @@ esp32s3.menu.PartitionScheme.custom_16MB.upload.maximum_size=16777216
 - Finalmente copiar el archivo de particiones "custom_16MB.csv" que esta junto al archivo ino en la carpeta ...\variants\esp32s3 y en la carpeta ...\tools\partitions
 
 Con eso deberia andar
-    
