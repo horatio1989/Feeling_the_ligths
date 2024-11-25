@@ -24,6 +24,8 @@ void setup() {
   tft_print("FW version: %.2f", FIRMWARE_VERSION);
   delay(2000);
 
+  sd_init();
+
   wifi_init();
 
   ota_init();
