@@ -27,31 +27,33 @@ void wifi_init() {
   for (int i = 0; i < 3; i++) {
     Serial.print("Conectando a ");
     Serial.println(ssid[i]);
+    tft_cls();
+    tft_print("Conecting to ");
+    tft_println(ssid[i]);
     WiFi.begin(ssid[i], password[i]);
 
     int timeout = 0;
     while (WiFi.status() != WL_CONNECTED && timeout < 10) {
       delay(1000);
       Serial.print(".");
+      tft_print(".");
       timeout++;
     }
 
     if (WiFi.status() == WL_CONNECTED) {
-      Serial.print("\r\nConectado a la red: ");
+      Serial.print("\r\nWiFi: ");
       Serial.println(ssid[i]);
-      char versionText[80];
-      snprintf(versionText, sizeof(versionText), "Conectado a %s", static_cast<const char*>(ssid[i]));
-      print_tft(versionText, 10, 120, 's', 2000);
+      tft_print("WiFi: ");
+      tft_println(ssid[i]);
       break;
     }
     WiFi.disconnect();
   }
-  Serial.print("IP address: ");
+  Serial.print("IP: ");
   Serial.println(WiFi.localIP());
-  char versionText[80];
-  String ipString = WiFi.localIP().toString();
-  snprintf(versionText, sizeof(versionText), "IP: %s", ipString.c_str());
-  print_tft(versionText, 10, 120, 's', 2000);
+  tft_print("IP: ");
+  tft_println("%s", WiFi.localIP().toString().c_str());
+  delay(2000);
 }
 
 void ota_init() {
@@ -107,6 +109,8 @@ void tft_init(int blk_int) {
   delay(200);
   tft.fillScreen(TFT_GREEN);
   Serial.println("TFT ready");
+  sprite.createSprite(240, 240);
+  Serial.println("Sprite ready");
 }
 
 void led_init() {

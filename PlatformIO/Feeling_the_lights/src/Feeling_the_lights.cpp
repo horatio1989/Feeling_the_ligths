@@ -19,12 +19,10 @@ void setup() {
   Serial.begin(115200);
 
   tft_init(5);
-  print_tft(FIRMWARE_VERSION, 10, 120, 'f', 2000);
-  tft.fillScreen(TFT_RED);
-
   Serial.print("Current firmware version: ");
   Serial.println(FIRMWARE_VERSION);
-  delay(200);
+  tft_print("FW version: %.2f", FIRMWARE_VERSION);
+  delay(2000);
 
   wifi_init();
 

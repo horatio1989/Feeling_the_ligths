@@ -18,6 +18,9 @@ extern SensorQMI8658 imu;
 
 extern float angleX, angleY, angleZ;
 
+/*extern int currentLine;
+extern const int lineHeight;*/
+
 // FFT Definitions
 // Resolution of frequencies is:   res  = Fs/samples
 // Number of frequencies bins are: n_f  = samples/2 
@@ -38,6 +41,9 @@ void update_fw(bool fw2update);
 void sampling();
 void processAudio();
 int getVolume(int micPin, int mic_avg);
+void tft_print(const char *format, ...);
+void tft_println(const char *format, ...);
+void tft_cls();
 
 template <typename T>
 void println_telnet(T var) {
@@ -48,7 +54,7 @@ void println_telnet(T var) {
       delay(10);  // Controla la frecuencia de envío
   }
 }
-
+/*
 template <typename A>
 void print_tft(A var, int x, int y, char format, int del) {
   char versionText[80];
@@ -70,6 +76,6 @@ void print_tft(A var, int x, int y, char format, int del) {
   sprite.drawString(versionText, x, y);
   sprite.pushSprite(0, 0);
   delay(del);
-}
+}*/
 
 #endif
