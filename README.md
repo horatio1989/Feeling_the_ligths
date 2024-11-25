@@ -23,7 +23,7 @@ El proyecto se estructura:
 - Core1_LED: Codigo de la tarea del nucleo para el LED
 - Core2_TFT: Codigo de la tarea del nucleo para el TFT
 - QuantumOTH: Funciones extras que no encajan en previas categorias
-- main: contiene el void setup(){} con las inizializaciones
+- Feeling_the_lights: contiene el void setup(){} con las inizializaciones, es el main
 
 La idea es que desde cada Tarea de los nucleos se llama a la funcion correspondiente dentro de LED_eff o TFT_eff. Eso implica que los distintos efectos deben ser creados y configurados dentro de esos dos archivos.
 
