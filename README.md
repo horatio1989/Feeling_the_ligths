@@ -6,9 +6,10 @@ Esquema de particion personalizado sin SPIFFS ya que tenemos acceso a una micro 
 - Configurado actualizacion de firmware via archivo *.bin en la SD o a traves de OTA
 - Configurado servidor Telnet para que el Tio Entraña pueda debugear en su MAC
 - Uso de ambos nucleos
-- Funcion personalizada para el Tio Entraña para que pueda debugear y escribir en consola con telnet:
+- Funciones personalizadas para el Tio Entraña para que pueda debugear y escribir en consola con telnet y en el display:
 ```
 println_telnet(<variable del tipo que quieras>);
+print_tft(<variable del tipo que quieras>, x, y, delay)
 ```
 
 Cada nucleo del ESP32 se encarga de una tarea especifica LED y TFT y se encuentran en dos *.cpp diferentes
