@@ -23,7 +23,7 @@ El proyecto se estructura:
 - Core1_LED: Codigo de la tarea del nucleo para el LED
 - Core2_TFT: Codigo de la tarea del nucleo para el TFT
 - QuantumOTH: Funciones extras que no encajan en previas categorias
-- main: contiene el void setup(){} con las inizializaciones
+- Feeling_the_lights: contiene el void setup(){} con las inizializaciones, es el main
 
 La idea es que desde cada Tarea de los nucleos se llama a la funcion correspondiente dentro de LED_eff o TFT_eff. Eso implica que los distintos efectos deben ser creados y configurados dentro de esos dos archivos.
 
@@ -34,11 +34,12 @@ A la hora de setear el proyecto por primera vez, es necesario descargar las sigu
 - 	Adafruit GFX Library
 - 	AnimatedGIF
 - 	Adafruit NeoPixel
-Una vez instaladas esas librerias, hay que reemplazar el archivo "User_Setup.h" que se encuentra en ".pio/libdeps/TFT_eSPI" por el "User_Setup.h" que se encuentra en el proyecto (en ninguna carpeta en particular"
 
-En donde se encuentre la carpeta "xxx\.platformio\packages\framework-arduinoespressif32\variants" en tu MAC, tenes que pegar la carpeta "waveshare_esp32s3_touch_lcd_128"
+Una vez instaladas esas librerias (deberia ser automatico la primera vez que cargas el proyecto en VS Code), hay que reemplazar el archivo "User_Setup.h" que se encuentra en ".pio/libdeps/TFT_eSPI" por el "User_Setup.h" que se encuentra en la carpeta "Extra files".
 
-El resto de las librerias utilizadas (como SD, SPI, etc.) vienen dentro del paquete de ESP32 o son las librerias creadas por nosotros
+En donde se encuentre la carpeta "xxx\.platformio\packages\framework-arduinoespressif32\variants" en tu MAC, tenes que pegar la carpeta "waveshare_esp32s3_touch_lcd_128" que se encuentra dentro de "Extra files.
+
+El resto de las librerias utilizadas (como SD, SPI, etc.) vienen dentro del paquete de ESP32 o son las librerias creadas por nosotros.
 
 En caso de usar OTA para actualizar el firmware dentro del archivo platformio.ini comentar la siguiente linea:
 ```
@@ -70,9 +71,9 @@ Feeling the lights
         └─ src             --> *.cpp files
         └─ include         --> *.h files
   └─ Python
-     └─ Original   --> tus scripts en Python
-     └─ To convert --> scripts que ya estan listos para convertir a C
-     └─ Converted  --> scripts que ya estan convertidos a C esperando ser includios en platformIO
+     └─ Original           --> tus scripts en Python
+     └─ To convert         --> scripts que ya estan listos para convertir a C
+     └─ Converted          --> scripts que ya estan convertidos a C esperando ser includios en platformIO
 ```
 FINALMENTE: recomiendo mucho usar VS Code + Platform IO. PERO si sos tan vago de no querer cambiar y quere seguir usando Arduino IDE... Hace lo siguiente:
 - Abri el archivo "Feeling_the_lights_ino.ino" que se encuentra en la carpeta "Feeling_the_lights_ino". mas facil no te lo puedo haber dejado! PERO no pushees ningun cambio que hagas ahi, porque yo trabajo en Platform IO y automaticamente cuando commiteo, se copian todos los archivos a esa carpeta, con lo cual perderias cualquier cosa que hayas hecho. De prefencia, lo que tengas de nuevo, pegalo en el archivo correspondiente cpp y h dentro de la estructura de proyecto de Platform IO
@@ -109,4 +110,3 @@ esp32s3.menu.PartitionScheme.custom_16MB.upload.maximum_size=16777216
 - Finalmente copiar el archivo de particiones "custom_16MB.csv" que esta junto al archivo ino en la carpeta ...\variants\esp32s3 y en la carpeta ...\tools\partitions
 
 Con eso deberia andar
-    
