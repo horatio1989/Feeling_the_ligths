@@ -9,7 +9,8 @@ Esquema de particion personalizado sin SPIFFS ya que tenemos acceso a una micro 
 - Funciones personalizadas para el Tio Entraña para que pueda debugear y escribir en consola con telnet y en el display:
 ```
 println_telnet(<variable del tipo que quieras>);
-print_tft(<variable del tipo que quieras>, x, y, delay)
+tft_print(); (funciona igual que Serial.print)
+tft_println(); (funciona igual que Serial.println)
 ```
 
 Cada nucleo del ESP32 se encarga de una tarea especifica LED y TFT y se encuentran en dos *.cpp diferentes
