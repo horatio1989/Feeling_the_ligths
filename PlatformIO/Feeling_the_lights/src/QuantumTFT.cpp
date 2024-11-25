@@ -12,6 +12,10 @@
 TFT_eSPI    tft    = TFT_eSPI();
 TFT_eSprite sprite = TFT_eSprite(&tft);
 
+int cursorX = 10;
+int cursorY = 100;
+const int lineHeight = 20;
+
 #define BUFFPIXEL 20
 
 using Point = std::pair<int, int>;
@@ -144,4 +148,47 @@ void bmpDraw(const char *filename, uint8_t x, uint16_t y) {
   }
   bmpFile.close();
   if(!goodBmp) Serial.println(F("BMP format not recognized."));
+}
+
+void tft_print(const char *format, ...) {
+  char buffer[128];
+  va_list args;
+  va_start(args, format);
+  vsnprintf(buffer, sizeof(buffer), format, args);
+  va_end(args);
+
+  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  sprite.setTextSize(2);
+
+  sprite.drawString(buffer, cursorX, cursorY);
+  cursorX += sprite.textWidth(buffer);
+  sprite.pushSprite(0, 0);
+}
+
+void tft_println(const char *format, ...) {
+  if (cursorY >= 160) {
+    cursorX = 10;
+    cursorY = 100;
+    sprite.fillScreen(TFT_BLACK);
+  }
+  char buffer[128];
+  va_list args;
+  va_start(args, format);
+  vsnprintf(buffer, sizeof(buffer), format, args);
+  va_end(args);
+
+  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  sprite.setTextSize(2);
+
+  sprite.drawString(buffer, cursorX, cursorY);
+  cursorX = 10;
+  cursorY += lineHeight;
+  sprite.pushSprite(0, 0);
+}
+
+void tft_cls() {
+  cursorX = 10;
+  cursorY = 100;
+  sprite.fillScreen(TFT_BLACK);
+  sprite.pushSprite(0, 0);
 }

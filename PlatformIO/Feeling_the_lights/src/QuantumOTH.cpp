@@ -15,10 +15,6 @@ ArduinoFFT<double> FFT = ArduinoFFT<double>(vReal, vImag, samples, Fs);
 double vReal[samples];
 double vImag[samples];
 
-int cursorX = 10;
-int cursorY = 100;
-const int lineHeight = 20;
-
 SensorQMI8658 imu;
 IMUdata acc;
 IMUdata gyr;
@@ -149,57 +145,8 @@ void processAudio() {
 int getVolume(int micPin, int mic_avg) {
     int sum = 0;
     for (int i = 0; i < 400; i++) {
-        //int val = analogRead(micPin);
         sum += abs(analogRead(micPin) - mic_avg);
         if (i % 45 == 0) delay(1);
     }
-    /*Serial.print(">");
-    Serial.print("sum:");
-    Serial.print(constrain(map(sum / 400, 0, 4095, 0, 255), 0, 255));
-    Serial.println(); // Writes \r\n*/
     return constrain(map(sum / 400, 0, 4095, 0, 255), 0, 255);
-}
-
-void tft_print(const char *format, ...) {
-  char buffer[128];
-  va_list args;
-  va_start(args, format);
-  vsnprintf(buffer, sizeof(buffer), format, args);
-  va_end(args);
-
-  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
-  sprite.setTextSize(2);
-
-  sprite.drawString(buffer, cursorX, cursorY);
-  cursorX += sprite.textWidth(buffer);
-  sprite.pushSprite(0, 0);
-}
-
-// Función tft_println
-void tft_println(const char *format, ...) {
-  if (cursorY >= 160) {
-    cursorX = 10;
-    cursorY = 100;
-    sprite.fillScreen(TFT_BLACK);
-  }
-  char buffer[128];
-  va_list args;
-  va_start(args, format);
-  vsnprintf(buffer, sizeof(buffer), format, args);
-  va_end(args);
-
-  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
-  sprite.setTextSize(2);
-
-  sprite.drawString(buffer, cursorX, cursorY);
-  cursorX = 10;
-  cursorY += lineHeight;
-  sprite.pushSprite(0, 0);
-}
-
-void tft_cls() {
-  cursorX = 10;
-  cursorY = 100;
-  sprite.fillScreen(TFT_BLACK);
-  sprite.pushSprite(0, 0);
 }

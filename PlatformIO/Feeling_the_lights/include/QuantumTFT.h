@@ -26,5 +26,8 @@ std::vector<std::vector<Point>> generate_triangle_side_points(int x, int y, int 
 uint16_t read16(File f);
 uint32_t read32(File f);
 void bmpDraw(const char *filename, uint8_t x, uint16_t y);
+void tft_print(const char *format, ...);
+void tft_println(const char *format, ...);
+void tft_cls();
 
 #endif
