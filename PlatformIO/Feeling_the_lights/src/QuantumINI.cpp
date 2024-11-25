@@ -6,7 +6,7 @@
 #include <WiFi.h>
 #include <SD.h>
 #include <ESPmDNS.h>
-#include <NetworkUdp.h>
+//#include <NetworkUdp.h>
 
 #include "QuantumTFT.h"
 #include "TFT_eff.h"

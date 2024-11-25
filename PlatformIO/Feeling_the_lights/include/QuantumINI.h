@@ -11,7 +11,7 @@
 #include <WiFi.h>
 
 #include <ESPmDNS.h>
-#include <NetworkUdp.h>
+//#include <NetworkUdp.h>
 
 extern WiFiServer telnetServer;
 extern WiFiClient telnetClient;
