@@ -3,6 +3,7 @@
 
 #include "QuantumDEF.h"
 #include "QuantumINI.h"
+#include "QuantumTFT.h"
 
 #include <SensorQMI8658.hpp>
 #include <Update.h>
@@ -46,6 +47,29 @@ void println_telnet(T var) {
       telnetClient.println(var);  // Envía el mensaje por Telnet
       delay(10);  // Controla la frecuencia de envío
   }
+}
+
+template <typename A>
+void print_tft(A var, int x, int y, char format, int del) {
+  char versionText[80];
+  switch (format) {
+    case 'f':
+      snprintf(versionText, sizeof(versionText), "%.2f", var);
+      break;
+    case 'i':
+      snprintf(versionText, sizeof(versionText), "%d", var);
+      break;
+    case 's':
+      snprintf(versionText, sizeof(versionText), "%s", var);
+      break;
+  }
+  sprite.createSprite(240, 240);
+  sprite.fillScreen(TFT_BLACK);
+  sprite.setTextColor(TFT_WHITE, TFT_BLACK); 
+  sprite.setTextSize(2);
+  sprite.drawString(versionText, x, y);
+  sprite.pushSprite(0, 0);
+  delay(del);
 }
 
 #endif

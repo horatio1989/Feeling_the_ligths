@@ -39,12 +39,19 @@ void wifi_init() {
     if (WiFi.status() == WL_CONNECTED) {
       Serial.print("\r\nConectado a la red: ");
       Serial.println(ssid[i]);
+      char versionText[80];
+      snprintf(versionText, sizeof(versionText), "Conectado a %s", static_cast<const char*>(ssid[i]));
+      print_tft(versionText, 10, 120, 's', 2000);
       break;
     }
     WiFi.disconnect();
   }
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  char versionText[80];
+  String ipString = WiFi.localIP().toString();
+  snprintf(versionText, sizeof(versionText), "IP: %s", ipString.c_str());
+  print_tft(versionText, 10, 120, 's', 2000);
 }
 
 void ota_init() {

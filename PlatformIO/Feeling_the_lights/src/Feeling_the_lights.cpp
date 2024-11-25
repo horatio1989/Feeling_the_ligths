@@ -18,6 +18,10 @@ int mic_avg = 0;
 void setup() {
   Serial.begin(115200);
 
+  tft_init(5);
+  print_tft(FIRMWARE_VERSION, 10, 120, 'f', 2000);
+  tft.fillScreen(TFT_RED);
+
   Serial.print("Current firmware version: ");
   Serial.println(FIRMWARE_VERSION);
   delay(200);
@@ -25,8 +29,6 @@ void setup() {
   wifi_init();
 
   ota_init();
-  
-  tft_init(5);
 
   imu_init();
 
